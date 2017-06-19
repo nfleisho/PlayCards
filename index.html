@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="bridge.ico" type="image/x-icon" />
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!--Special fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Allan:bold' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Cardo' rel='stylesheet' type='text/css'>
+
+    <!--Local stylesheet-->
+    <link rel="stylesheet" href="styles/style.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!--Local Javascript-->
+    <script src="scripts/index.js"></script>
+    <title>BegBridgeSkilz</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row" style="margin:2%;">
+
+            <div class="col-sm-12">
+                <h1 class="pgtop" style="text-align:center" ;> BridgeSkilz (Basic) </h1>
+            </div>
+        </div>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <li id="newDeal"><a style="cursor:pointer">Deal Hand</a></li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Practice <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+
+                            <li><a href="ptCont.html">Counting Points</a></li>
+                            <li><a href="openStr.html">Opening Bids (Strong)</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#collhelp" data-toggle="collapse">Help</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div id="collhelp" class="collapse">
+            <h1 style="text-align:center;">Version 1.0</h1>
+
+            <p style="text-align:right;">13.02.2017</p>
+            <p>This page deals and displays (bridge) hands.</p>
+            <ul>
+                <li>click <code>Deal Hand</code> to deal a new bridge hand.</li>
+                <li>click <code>Practice</code> to choose practice pages.</li>
+                <li>click <code>View:Text/Cards</code> to show the hand as card text or actual playing cards.</li>
+                <li>click <code>Help</code> to hide/show this message.</li>
+            </ul>
+            <address>Problems, questions, comments: <a href="mailto:nfleiso@cox.net?Subject=Deal Hands" target="_top">email</a> me.</address>
+        </div>
+        <button id="txtcrd" > View:Text/Cards</button>
+        <div class="row">
+            <div class="col-sm-7"></div>
+            <div class="col-sm-5" style="text-align:center"><strong>Dealer: North</strong></div>
+            </div>
+            <div class="row txtrw">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-2" id="div0">
+            </div>
+            <div class="col-sm-5"></div>
+        </div>
+        <div class="row txtrw">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-2" id="div3">
+            </div>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-2" id="div1">
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="row txtrw">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-2" id="div2">
+            </div>
+            <div class="col-sm-5"></div>
+        </div>
+        <div class="row imrw">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4" id="imdiv0">
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+        <div class="row imrw">
+            <div class="col-sm-4" id="imdiv3">
+            </div>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4" id="imdiv1">
+            </div>
+        </div>
+        <div class="row imrw">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4" id="imdiv2">
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+
+    </div>
+    <script>
+        $(dealHand);
+        $("#newDeal").on("click", function() {
+            location.reload(true)
+        });
+        $("#txtcrd").on("click",toggCrd);
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="bridge.ico" type="image/x-icon" />
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <!--Special fonts-->
+      <link href='http://fonts.googleapis.com/css?family=Allan:bold' rel='stylesheet' type='text/css'>
+      <link href='http://fonts.googleapis.com/css?family=Cardo' rel='stylesheet' type='text/css'>
+      <!--Local stylesheet-->
+      <link rel="stylesheet" href="styles/style.css">
+      <title>Suit Split</title>
+      
+  </head>
+  <body >
+      <div class="container">
+          <div class="row" style="margin:2%;" >
+              
+              <div class="col-sm-12">
+                <h1 style="text-align:center;"> Distribution of Suit in Team</h1>
+              </div>
+          </div>
+          <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+         <ul class="nav navbar-nav">
+          <li><a style="cursor:pointer" href="index.html">Deal Hand</a></li>
+          <!--<li><a style="cursor:pointer" >Show Points</a></li>-->
+          
+         </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="http://www.rpbridge.net/7z76.htm#1/" target="_blank">More Info on Points Stats</a>
+                </li>
+                <li ><a  href="#collhelp" data-toggle="collapse">Help</a>
+                </li>
+              
+                
+         </ul>
+        </div>
+      </nav>
+          <div id="collhelp" class="collapse">   
+      <h1 style="text-align:center;">Version 1.0</h1>
+      
+      <p style="text-align:right;">19.02.2017</p>
+      <ul> This page simulates dealing bridge hands.
+       <li><code>Deal Hand</code> will take you to a page showing one deal</li>
+       <li><code>More Info..</code> will take you to a theoretical discussion of probabilities.</li> 
+       <li><code>Number of Shuffles</code> sets the number of times the deck is shuffled before each deal.  One or two times is probably sufficient. (Can you guess what the graph will look like with zero shuffles?)  The graph will redraw after <kbd>return</kbd> or <kbd>tab</kbd>.</li> 
+       <li><code>Number of Deals</code> sets the number of times the deck is dealt during data collection.  The number of hands sampled is four times the number of deals. The more deals you enter, the longer it will take for the graph to appear.  The graph will redraw after <kbd>return</kbd> or <kbd>tab</kbd>.</li> 
+      </ul>
+      <address>Problems, questions, comments: <a href="mailto:nfleiso@cox.net?Subject=DefDist" target="_top">email</a></address>
+          </div>
+          <div class="row" >
+              <div class="col-sm-2"></div>
+              <div class="col-sm-4">Number of Shuffles: <input type="number" id="shuff" value=5 onChange="fillDistTable()" /> </div>
+              <div class="col-sm-2"></div>
+              <div class="col-sm-4">Number of Deals: <input type="number" id="dealsnum" value=2000 onChange="fillDistTable()" /> </div>
+          </div>
+         <div class="row" >
+             <table class="table table-hover">
+                 <thead>
+                 <tr>
+                     <th> 
+                     </th>
+                     <th colspan="14" > Number of Cards Held By One Player
+                     </th>
+                 </tr>
+                 <tr>
+                     <th> Team<br> Total</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th> sample<br> size</th>
+                 </tr>
+                 </thead>
+                 <tbody id="gendat">
+                 </tbody>
+             </table>
+          <div class="col-sm-1"></div>
+          <div class="col-sm-10" id="hidiv"></div>
+          <div class="col-sm-1"></div>
+        </div>
+       
+        
+      
+      <!-- jQuery library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+      <!-- Latest compiled JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      
+      <!--Local Javascript-->
+      <script src="scripts/index.js"></script>
+    
+      
+     
+         
+   </body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="bridge.ico" type="image/x-icon" />
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <!--Special fonts-->
+      <link href='http://fonts.googleapis.com/css?family=Allan:bold' rel='stylesheet' type='text/css'>
+      <link href='http://fonts.googleapis.com/css?family=Cardo' rel='stylesheet' type='text/css'>
+      <!--Local stylesheet-->
+      <link rel="stylesheet" href="styles/style.css">
+
+      <!-- jQuery library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+      <!-- Latest compiled JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      
+      <!--Local Javascript-->
+      <script src="scripts/index.js"></script>
+      <title>Statistics-Points Dealt</title>
+      
+      <!--Google Charts-->
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+     <script type="text/javascript">
+       google.charts.load('current', {packages: ['corechart']});
+       google.charts.setOnLoadCallback(drawChart);
+       google.charts.setOnLoadCallback(drawPiChart);
+     </script>
+      
+  </head>
+  <body >
+      <div class="container">
+          <div class="row" style="margin:2%;" >
+              
+              <div class="col-sm-12">
+                <h1 style="text-align:center;"> Probability of Hands with Point Values</h1>
+              </div>
+          </div>
+          <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+         <ul class="nav navbar-nav">
+          <li><a style="cursor:pointer" href="index.html">Deal Hand</a></li>
+          <!--<li><a style="cursor:pointer" >Show Points</a></li>-->
+          
+         </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="http://www.rpbridge.net/7z76.htm#1/" target="_blank">More Info on Points Stats</a>
+                </li>
+                <li ><a  href="#collhelp" data-toggle="collapse">Help</a>
+                </li>
+              
+                
+         </ul>
+        </div>
+      </nav>
+          <div id="collhelp" class="collapse">   
+      <h1 style="text-align:center;">Version 1.0</h1>
+      
+      <p style="text-align:right;">19.02.2017</p>
+      <ul> This page simulates dealing bridge hands.
+       <li><code>Deal Hand</code> will take you to a page showing one deal</li>
+       <li><code>More Info..</code> will take you to a theoretical discussion of probabilities.</li> 
+       <li><code>Number of Shuffles</code> sets the number of times the deck is shuffled before each deal.  One or two times is probably sufficient. (Can you guess what the graph will look like with zero shuffles?)  The graph will redraw after <kbd>return</kbd> or <kbd>tab</kbd>.</li> 
+       <li><code>Number of Deals</code> sets the number of times the deck is dealt during data collection.  The number of hands sampled is four times the number of deals. The more deals you enter, the longer it will take for the graph to appear.  The graph will redraw after <kbd>return</kbd> or <kbd>tab</kbd>.</li> 
+      </ul>
+      <address>Problems, questions, comments: <a href="mailto:nfleiso@cox.net?Subject=PointStats" target="_top">email</a></address>
+          </div>
+          <div class="row" >
+              <div class="col-sm-2"></div>
+              <div class="col-sm-4">Number of Shuffles: <input type="number" id="shuff" value=5 onChange="drawCharts()" /> </div>
+              <div class="col-sm-2"></div>
+              <div class="col-sm-4">Number of Deals: <input type="number" id="dealsnum" value=2000 onChange="drawCharts()" /> </div>
+          </div>
+         <div class="row" >
+          <div class="col-sm-1"></div>
+          <div class="col-sm-10" id="hidiv"></div>
+          <div class="col-sm-1"></div>
+        </div>
+       
+        <div class="row" >
+          <div class="col-sm-1"></div>
+          <div class="col-sm-4" id="stathi"></div>
+          <div class="col-sm-2"></div>
+          <div class="col-sm-4" id="stattot"></div>
+          <div class="col-sm-1"></div>
+        </div> 
+        <!-- <div class="row txtrw">
+          <div class="col-sm-5"></div>
+          <div class="col-sm-2" id="div2"><div id="pts2"></div></div>
+          <div class="col-sm-5"></div>
+        </div>-->
+        <div class="row" >
+          <div class="col-sm-1"></div>
+          <div class="col-sm-10" id="bidiv"></div>
+          <div class="col-sm-1"></div>
+        </div>
+        
+          <!--<div class="row imrw">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-4" id="imdiv2"><div id="impts2"></div></div>
+          <div class="col-sm-4"></div>
+        </div> -->   
+      </div> 
+      
+      
+   </body>
+</html>
