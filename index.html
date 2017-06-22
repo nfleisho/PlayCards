@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="styles/style.css">
 
     <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -25,6 +25,7 @@
     <!--Local Javascript-->
     <script src="scripts/index.js"></script>
     <title>BegBridgeSkilz</title>
+
 
 </head>
 
@@ -50,30 +51,48 @@
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#collhelp" data-toggle="collapse">Help</a>
+                    <li><a href="#helpModal" data-toggle="modal"> Help</a>
                     </li>
                 </ul>
             </div>
         </nav>
-        <div id="collhelp" class="collapse">
-            <h1 style="text-align:center;">Version 1.0</h1>
+        <!-- Modal -->
+        <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby=" " aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">BridgeSkilz Help</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h1 style="text-align:center;">Version 1.0</h1>
 
-            <p style="text-align:right;">13.02.2017</p>
-            <p>This page deals and displays (bridge) hands.</p>
-            <ul>
-                <li>click <code>Deal Hand</code> to deal a new bridge hand.</li>
-                <li>click <code>Practice</code> to choose practice pages.</li>
-                <li>click <code>View:Text/Cards</code> to show the hand as card text or actual playing cards.</li>
-                <li>click <code>Help</code> to hide/show this message.</li>
-            </ul>
-            <address>Problems, questions, comments: <a href="mailto:nfleiso@cox.net?Subject=Deal Hands" target="_top">email</a> me.</address>
+                        <p style="text-align:right;">13.02.2017</p>
+                        <p>This page deals and displays (bridge) hands.</p>
+                        <ul>
+                            <li>click <code>Deal Hand</code> to deal a new bridge hand.</li>
+                            <li>click <code>Practice</code> to choose practice pages.</li>
+                            <li>click <code>View:Text/Cards</code> to show the hand as card text or actual playing cards.</li>
+                            <li>click <code>Help</code> to show this message.</li>
+                        </ul>
+
+                    </div>
+                    <div class="modal-footer"><address>Problems, questions, comments: <a href="mailto:nfleiso@cox.net?Subject=Deal Hands" target="_top">email</a> me.</address>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
         </div>
-        <button id="txtcrd" > View:Text/Cards</button>
+        <!-- /.modal -->
+
+        <button id="txtcrd"> View:Text/Cards</button>
         <div class="row">
             <div class="col-sm-7"></div>
             <div class="col-sm-5" style="text-align:center"><strong>Dealer: North</strong></div>
-            </div>
-            <div class="row txtrw">
+        </div>
+        <div class="row txtrw">
             <div class="col-sm-5"></div>
             <div class="col-sm-2" id="div0">
             </div>
@@ -120,8 +139,7 @@
         $("#newDeal").on("click", function() {
             location.reload(true)
         });
-        $("#txtcrd").on("click",toggCrd);
-
+        $("#txtcrd").on("click", toggCrd);
     </script>
 
 </body>

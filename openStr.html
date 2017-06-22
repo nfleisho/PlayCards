@@ -65,36 +65,57 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#collstats" data-toggle="collapse">Stats</a>
                     </li>
-                    <li><a href="#collinfo" data-toggle="collapse">Info</a>
+                     <li><a href="#infoModal" data-toggle="modal"> Info</a>
                     </li>
-                    <li><a href="#collhelp" data-toggle="collapse">Help</a>
+                    <li><a href="#helpModal" data-toggle="modal"> Help</a>
                     </li>
-
-
-
                 </ul>
             </div>
         </nav>
 
-        <div id="collhelp" class="collapse">
-            <h1 style="text-align:center;">Version 1.0</h1>
+        <!--Help Modal Start-->
+        <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby=" " aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Opening Bid Help</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h1 style="text-align:center;">Version 1.0</h1>
 
             <p style="text-align:right;">16.06.2017</p>
-            <p>This page deals and displays (bridge) hands. The user can count hand points and compare to the computed values shown.</p>
+            <p>This page deals and displays (bridge) hands. The user can determine opening bids and compare to the computed values shown.</p>
             <ul>
-                <li>select from <code>Practise</code> to go to another page.</li>
+                <li>select from <code>Practice</code> to go to another page.</li>
                 <li>click <code>Deal Hand</code> to deal a new bridge hand.</li>
                 <li>mouse over the table position (e.g."North") of a hand to show high card and length points for that hand.</li>
                 <li>click <code>Show Opening Bid</code> for a computer display of bids up to and including the opener.</li>
                 <li>click <code>Stats</code> to hide/show opening bid probablity info.</li>
-                <li>click <code>Info</code> to hide/show opening bid rules used in this page.</li>
-                <li>click <code>Help</code> to hide/show this message.</li>
-
+                <li>click <code>Info</code> to show opening bid rules used in this page.</li>
+                <li>click <code>Help</code> to show this message.</li>
             </ul>
-            <address>Problems, questions, comments: <a href="mailto:nfleiso@cox.net?Subject=Deal Hands" target="_top">email</a> me.</address>
+                    </div>
+                    <div class="modal-footer"><address>Problems, questions, comments: <a href="mailto:nfleiso@cox.net?Subject=PointCount" target="_top">email</a> me.</address>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
         </div>
-        <div id="collinfo" class="collapse">
-            <p><strong>Opening Bids</strong></p>
+        <!-- /.modal -->
+
+        <!--Info Modal Start-->
+        <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby=" " aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Point Count Info</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Opening Bids</strong></p>
             <div class="table-responsive">
                 <table class="table table-hover ">
                     <tr>
@@ -149,7 +170,7 @@
                 <ul>
                     <li >even - no voids, singletons. at most one doubleton</li>
                     <li>HCP - high card points</li>
-                    <li>etc...</li>
+
                 </ul>
 
                 <p><strong>Notes:</strong>
@@ -157,9 +178,14 @@
                         <li>no weak 2's or 3's</li>
                         <li>no 3rd hand bidding at 10 points</li>
                     </ul>
-
-
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
         </div>
+        <!-- /.modal -->
+
         <div id="collstats" class="collapse">
             <div class="container">
                 <div class="row" style="margin:2%;">

@@ -62,35 +62,57 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#collstats" data-toggle="collapse">Stats</a>
                     </li>
-                    <li><a href="#collinfo" data-toggle="collapse">Info</a>
+                    <li><a href="#infoModal" data-toggle="modal"> Info</a>
                     </li>
-                    <li><a href="#collhelp" data-toggle="collapse">Help</a>
+                    <li><a href="#helpModal" data-toggle="modal"> Help</a>
                     </li>
-
-
-
                 </ul>
             </div>
         </nav>
 
-        <div id="collhelp" class="collapse">
-            <h1 style="text-align:center;">Version 1.0</h1>
+        <!--Help Modal Start-->
+        <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby=" " aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Point Count Help</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h1 style="text-align:center;">Version 1.0</h1>
 
-            <p style="text-align:right;">12.06.2017</p>
-            <p>This page deals and displays (bridge) hands. The user can count hand points and compare to the computed values shown.</p>
-            <ul>
-                <li>click <code>Practice</code> to go to another page.</li>
-                <li>click <code>Deal Hand</code> to deal a new bridge hand.</li>
-                <li>mouse over the table position (e.g."North") of a hand to show high card and length points for that hand.</li>
-                <li>click <code>Show/Hide All Points</code> to toggle display of high card and length points for all hands.</li>
-                <li>click <code>Stats</code> to hide/show point count probablity info.</li>
-                <li>click <code>Info</code> to hide/show point counting rules used in this page.</li>
-                <li>click <code>Help</code> to hide/show this message.</li>
-            </ul>
-            <address>Problems, questions, comments: <a href="mailto:nfleiso@cox.net?Subject=PointCount" target="_top">email</a> me.</address>
+                        <p style="text-align:right;">12.06.2017</p>
+                        <p>This page deals and displays (bridge) hands. The user can count hand points and compare to the computed values shown.</p>
+                        <ul>
+                            <li>click <code>Practice</code> to go to another page.</li>
+                            <li>click <code>Deal Hand</code> to deal a new bridge hand.</li>
+                            <li>mouse over the table position (e.g."North") of a hand to show high card and length points for that hand.</li>
+                            <li>click <code>Show/Hide All Points</code> to toggle display of high card and length points for all hands.</li>
+                            <li>click <code>Stats</code> to hide/show point count probablity info.</li>
+                            <li>click <code>Info</code> to show point counting rules used in this page.</li>
+                            <li>click <code>Help</code> to show this message.</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer"><address>Problems, questions, comments: <a href="mailto:nfleiso@cox.net?Subject=PointCount" target="_top">email</a> me.</address>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
         </div>
-        <div id="collinfo" class="collapse">
-            <p><strong>High Card Point Values:</strong></p>
+        <!-- /.modal -->
+
+        <!--Info Modal Start-->
+        <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby=" " aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Point Count Info</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>High Card Point Values:</strong></p>
             <ul>
                 <li>A : 4</li>
                 <li>K : 3</li>
@@ -103,9 +125,16 @@
                 <li>6 card suit : 2</li>
                 <li>etc...</li>
             </ul>
-
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
         </div>
+        <!-- /.modal -->
+
         <div id="collstats" class="collapse">
+            <div class="container">
             <div class="row" style="margin:2%;">
 
                 <div class="col-sm-12">
@@ -113,11 +142,11 @@
                     <h3>Click on <code>Get Stats</code> to generate point value statistics on 5000 deals (20000 hands).</h3>
                 </div>
                 <button id="getStats">Get Stats</button>
+                </div>
                 <div class="progress" style="width:20%;display:none">
                     <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:100%">
                     </div>
                 </div>
-            </div>
 
             <div class="row">
                 <div class="col-sm-1"></div>
@@ -132,6 +161,7 @@
                 <div class="col-sm-4" id="stattot"></div>
                 <div class="col-sm-1"></div>
             </div>
+        </div>
         </div>
 
         <div class="row">
