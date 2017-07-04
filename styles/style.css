@@ -29,3 +29,17 @@ th,td {text-align: center}
     padding-left: 4px;
 
 }
+
+.hnddisp {
+    min-height: 100px;
+}
+
+.tblpos {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.bids {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}

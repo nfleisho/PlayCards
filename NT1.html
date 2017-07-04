@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="bridge.ico" type="image/x-icon" />
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!--Special fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Allan:bold' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Cardo' rel='stylesheet' type='text/css'>
+
+    <!--Local stylesheet-->
+    <link rel="stylesheet" href="styles/style.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!--Local Javascript-->
+    <script src="scripts/index_NT.js"></script>
+    <title>BegBridgeSkilz</title>
+
+    <!--Google Charts-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            packages: ['corechart']
+        });
+
+        //google.charts.setOnLoadCallback(drawPiChart);
+
+    </script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row" style="margin:2%;">
+            <div class="col-sm-12">
+                <h1 class="pgtop" style="text-align:center" ;> BridgeSkilz (Basic) - 1 No Trump Response </h1>
+            </div>
+        </div>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">BridgeSkilz Home</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li id="newDeal"><a style="cursor:pointer">Deal Hand</a></li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Practice <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="ptCont.html">Counting Points</a></li>
+                            <li><a href="openStr.html">Opening Bids</a></li>
+                            <li style="color:gray;padding-left:16px">1 No Trump Response</li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#collstats" data-toggle="collapse">Stats</a>
+                    </li>
+                    <li><a href="#infoModal" data-toggle="modal"> Info</a>
+                    </li>
+                    <li><a href="#helpModal" data-toggle="modal"> Help</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!--Help Modal Start-->
+        <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby=" " aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">1 NT Response Help</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h1 style="text-align:center;">Version 1.0</h1>
+
+                        <p style="text-align:right;">16.06.2017</p>
+                        <p>This page deals and displays (bridge) hands with a 1 NT opening bid. The user can determine bid responses and compare to the computed values shown. It is Assumed that there is no denfensive bidding interference.</p>
+                        <ul>
+                            <li>select from <code>Practice</code> to go to another page.</li>
+                            <li>click <code>Deal Hand</code> to deal a new bridge hand.</li>
+                            <li>mouse over the table position (e.g."North") of a hand to show high card and length points for that hand.</li>
+                            <li>click <code>Show Next Bid</code> for a computer display of partner's bid.</li>
+                            <li>click <code>Stats</code> to hide/show 1 NT bid and response probablity info.</li>
+                            <li>click <code>Info</code> to show bid response rules used in this page.</li>
+                            <li>click <code>Help</code> to show this message.</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer"><address>Problems, questions, comments: <a href="mailto:nfleiso@cox.net?Subject=1NT" target="_top">email</a> me.</address>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <!--Info Modal Start-->
+        <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby=" " aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">1 NT Response Info</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Responder Bid</strong></p>
+                        <div class="table-responsive">
+                            <table class="table table-hover ">
+                                <tr>
+                                    <th>Points in Hand</th>
+                                    <th>Hand Distribution</th>
+                                    <th>Bid</th>
+                                </tr>
+                                <tr>
+                                    <td>more than 9 tot</td>
+                                    <td>more than 5 &spades;/&hearts;</td>
+                                    <td>4 &spades;/&hearts;(signoff)</td>
+                                </tr>
+                                <tr>
+                                    <td>more than 9 tot</td>
+                                    <td>more than 5 &diams;/&clubs;</td>
+                                    <td>3 NT(signoff) </td>
+                                </tr>
+                                <tr>
+                                    <td>more than 9 tot</td>
+                                    <td>5 &spades;/&hearts;</td>
+                                    <td>3 &spades;/&hearts;(forcing)</td>
+                                </tr>
+                                <tr>
+                                    <td>more than 9 tot</td>
+                                    <td>otherwise</td>
+                                    <td>3 NT(signoff)</td>
+                                </tr>
+                                <tr>
+                                    <td>8-9 tot</td>
+                                    <td>more than 4 &spades;/&hearts;</td>
+                                    <td>3 &spades;/&hearts;(forcing)</td>
+                                </tr>
+                                <tr>
+                                    <td>8-9 tot</td>
+                                    <td>otherwise</td>
+                                    <td>2 NT(invite)</td>
+                                </tr>
+
+                                <tr>
+                                    <td>0-7 tot</td>
+                                    <td>more than 4 <em>suit</em></td>
+                                    <td>2 <em>suit</em>(signoff)</td>
+                                </tr>
+                                <tr>
+                                    <td>0-7 tot</td>
+                                    <td>otherwise</td>
+                                    <td>pass(signoff)</td>
+                                </tr>
+
+                            </table>
+                            <p><strong>Declarer Re-Bid</strong></p>
+                            <table class="table table-hover ">
+                                <tr>
+                                    <th>Response</th>
+                                    <th>Points in Hand</th>
+                                    <th>Hand Distribution</th>
+                                    <th>Bid</th>
+                                </tr>
+                                <tr>
+                                    <td>all signoff</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>pass</td>
+                                </tr>
+                                <tr>
+                                    <td>3 &spades;/&hearts;</td>
+                                    <td></td>
+                                    <td>more than 2 &spades;/&hearts;</td>
+                                    <td>4 &spades;/&hearts; </td>
+                                </tr>
+                                <tr>
+                                    <td>3 &spades;/&hearts;</td>
+                                    <td></td>
+                                    <td>less than 3 &spades;/&hearts;</td>
+                                    <td>3 NT</td>
+                                </tr>
+                                <tr>
+                                    <td>2 NT</td>
+                                    <td>more than 15 HCP</td>
+                                    <td></td>
+                                    <td>3 NT</td>
+                                </tr>
+                                <tr>
+                                    <td>2 NT</td>
+                                    <td>15 HCP</td>
+                                    <td></td>
+                                    <td>pass</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <p><strong>Definitions:</strong>
+                            <ul>
+                                <li>signoff - expected next bid is pass</li>
+                                <li>forcing - expected next bid cannot be pass</li>
+                                <li>invite - expected next bid among choices</li>
+
+                            </ul>
+
+                            <p><strong>Notes:</strong>
+                                <ul>
+                                    <li>no Stayman</li>
+                                    <li>no Jacobi transfers</li>
+                                    <li>no slam bids</li>
+                                </ul>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <div id="collstats" class="collapse">
+            <div class="container">
+                <div class="row" style="margin:2%;">
+
+                    <div class="col-sm-12">
+                        <h1 style="text-align:center;"> Opening Bid Probabilities </h1>
+                        <h3>Click on <code>Get Stats</code> to generate strong opening bid probabilities based on 5000 deals.</h3>
+                    </div>
+                    <button id="getStats">Get Stats</button>
+                </div>
+                <div class="progress" style="width:20%;display:none">
+                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:100%">Working...
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-10" id="hidiv"></div>
+                    <div class="col-sm-1"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-4" id="stathi"></div>
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4" id="stattot"></div>
+                    <div class="col-sm-1"></div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10">
+                <p>Here is a hand where the opening bid is 1 NT. <strong>Assume</strong> (for the sake of practice) that the defense, whose hands are grayed out, will not interefere in the bidding. (They will pass.) Choose <em>the partner's </em>response and click on <code>Show Next Bid</code> to see the computed suggestion. Continue until one of the partner's bids "pass" to end the bidding.</p>
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-7"></div>
+            <div class="col-sm-5" style="text-align:center"><strong>Dealer: North</strong></div>
+        </div>
+        <button id="nxtBid"> Show Next Bid</button>
+        <div class="row txtrw">
+            <div class="col-sm-5"></div>
+
+            <div class="col-sm-2">
+                <h4 class="tblpos">North</h4>
+                <div class="hnddisp" id="div0" data-hand="hand0"></div>
+                <div id="bid0"></div>
+                <div class="pts"></div>
+
+            </div>
+            <div class="col-sm-5"></div>
+        </div>
+        <div class="row txtrw">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-2">
+                <h4 class="tblpos">West</h4>
+                <div class="hnddisp" id="div3" data-hand="hand3"></div>
+                <div id="bid3"></div>
+                <div class="pts"></div>
+
+            </div>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-2">
+                <h4 class="tblpos">East</h4>
+                <div class="hnddisp" id="div1" data-hand="hand1"></div>
+                <div id="bid1"></div>
+                <div class="pts"></div>
+
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="row txtrw">
+            <div class="col-sm-5"></div>
+            <div class="col-sm-2">
+                <h4 class="tblpos">South</h4>
+                <div class="hnddisp" id="div2" data-hand="hand2"></div>
+                <div id="bid2"></div>
+                <div class="pts"></div>
+
+            </div>
+            <div class="col-sm-5" style='min-height:250px'></div>
+        </div>
+
+
+    </div>
+    <script>
+        $(function() {
+            dealHand();
+            //drawChart();
+            $("#newDeal").on("click", function() {
+                location.reload(true)
+            });
+            $("#nxtBid").on("click", function() {
+                //working..6/29
+                if (btndex == 0) {
+                    respNfade(declar);
+                    btndex += 1
+                } else if (btndex == 1) {
+                    rebidNfade();
+                    btndex += 1
+                } else alert("The contract is set. No more bids.");
+            });
+            $("#allPoints").on("click", function() {
+                if ($(".ptzdisp").length != 0) $(".ptzdisp").remove();
+                else {
+                    $("div.hnddisp").each(function() {
+                        var hnd_up = $(this).attr("data-hand");
+                        $(this).append($showPoints(table[hnd_up]));
+                    });
+                };
+            });
+
+            $(".tblpos").hover(function() {
+                $(".ptzdisp").remove();
+                var hnd_up = $(this).siblings("div.hnddisp").attr("data-hand");
+                $(this).siblings("div.pts").html($showPoints(table[hnd_up]));
+            }, function() {
+                var hnd_up = $(this).siblings("div.hnddisp").attr("data-hand");
+                $(".ptzdisp").remove();
+            });
+            $("#getStats").click(function() {
+                $(".progress").show("fast", drawPiChart).hide("fast");
+            });
+        })
+
+    </script>
+
+</body>
+
+</html>
