@@ -1,103 +1,3 @@
-var btndex = 0;
-var declar = 0;
-var suitlist = ['clubs', 'diams', 'hearts', 'spades'].reverse();
-var vallist = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'].reverse();
-var pointlist = {
-    A: 4,
-    K: 3,
-    Q: 2,
-    J: 1
-};
-var players = ["North", "East", "South", "West"];
-//deck is object containing 52 cards and methods
-var deck = {};
-//table is set of dealt hands
-var table = {};
-//nudeck is sorted full deck. used as sorting reference for hands
-var nudeck = nuDeck();
-// cards is an array of card objects
-deck.cards = [];
-//creates ordered new deck
-deck.create = function () {
-    this.cards = [];
-    for (var isuit = 0; isuit < suitlist.length; isuit++) {
-        for (var ivals = 0; ivals < vallist.length; ivals++) {
-            var card = {};
-            card.suit = suitlist[isuit];
-            card.valu = vallist[ivals];
-            this.cards.push(card);
-        }
-    }
-}
-
-
-//randomizes deck (????)
-deck.shuffle = function (shufmax) {
-    if (!shufmax) shufmax = 5;
-    for (jshuf = 0; jshuf < shufmax; jshuf++)
-        this.cards.sort(function (a, b) {
-            return (0.5 - Math.random())
-        })
-}
-
-//deals deck into handsnum hands of handsize cards (default:4@13)
-deck.deal = function (handsnum, handsize) {
-    if (!handsnum) handsnum = 4;
-    if (!handsize) handsize = this.cards.length / handsnum;
-    var cardind = 0;
-    for (var handind = 0; handind < handsnum; handind++)
-        table["hand" + handind] = [];
-    //table["hand"+handind].cards=[];
-    for (var sizind = 0; sizind < handsize; sizind++) {
-        for (var handind = 0; handind < handsnum; handind++) {
-            table["hand" + handind].push(this.cards[cardind]);
-            cardind += 1;
-        }
-    }
-    for (var item in table) {
-        table[item].sort(function (a, b) {
-            var x = trakInd(nudeck, a);
-            var y = trakInd(nudeck, b);
-            if (x < y) {
-                return -1;
-            }
-            if (x > y) {
-                return 1;
-            }
-            return 0;
-        });
-    }
-}
-//returns high card points in hand. hand is array of card objects.
-function HCP(hand) {
-    var hipt = 0;
-    for (var cardind = 0; cardind < hand.length; cardind++) {
-        var crdval = hand[cardind].valu;
-        if (crdval in pointlist) hipt += pointlist[crdval];
-    }
-    return hipt;
-}
-//returns unshuffled deck. deck is array of 52 sorted card objects
-function nuDeck() {
-    var shuffNo = [];
-    for (var isuit = 0; isuit < suitlist.length; isuit++) {
-        for (var ivals = 0; ivals < vallist.length; ivals++) {
-            var card = {};
-            card.suit = suitlist[isuit];
-            card.valu = vallist[ivals];
-            shuffNo.push(card);
-        }
-    }
-    return shuffNo;
-}
-//returns index in arrref of objin.  used to track index of card in nuDeck for sorting.
-function trakInd(arrref, objin) {
-    var refind = arrref.findIndex(function (item) {
-        return (item.suit == objin.suit && item.valu == objin.valu)
-    });
-    return refind;
-}
-
 //constructor for hand object
 function hand(crdarr) {
     this.cards = crdarr;
@@ -178,33 +78,114 @@ function hand(crdarr) {
         }
     }
 }
-//returns length points in hand. hand is array of card objects
-function LPts(hand) {
-    var lenpts = 0;
-    for (var jsuit = 0; jsuit < suitlist.length; jsuit++) {
-        var suitsub = hand.filter(function (crds) {
-            return crds.suit == suitlist[jsuit]
-        });
-        if (suitsub.length > 4) lenpts += (suitsub.length - 4);
+var btndex = 0;
+var declar = 0;
+
+
+var suitlist = ['clubs', 'diams', 'hearts', 'spades'].reverse();
+var vallist = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'].reverse();
+var pointlist = {
+    A: 4,
+    K: 3,
+    Q: 2,
+    J: 1
+};
+var players = ["North", "East", "South", "West"];
+//deck is object containing 52 cards and methods
+var deck = {};
+//table is set of dealt hands
+var table = {};
+//nudeck is sorted full deck. used as sorting reference for hands
+var nudeck = nuDeck();
+// cards is an array of card objects
+deck.cards = [];
+//creates ordered new deck
+deck.create = function () {
+    this.cards = [];
+    for (var isuit = 0; isuit < suitlist.length; isuit++) {
+        for (var ivals = 0; ivals < vallist.length; ivals++) {
+            var card = {};
+            card.suit = suitlist[isuit];
+            card.valu = vallist[ivals];
+            this.cards.push(card);
+        }
     }
-    return lenpts;
+}
+//randomizes deck (????)
+deck.shuffle = function (shufmax) {
+    if (!shufmax) shufmax = 5;
+    for (jshuf = 0; jshuf < shufmax; jshuf++)
+        this.cards.sort(function (a, b) {
+            return (0.5 - Math.random())
+        })
+}
+
+//deals deck into handsnum hands of handsize cards (default:4@13)
+deck.deal = function (handsnum, handsize) {
+    if (!handsnum) handsnum = 4;
+    if (!handsize) handsize = this.cards.length / handsnum;
+    var cardind = 0;
+    for (var handind = 0; handind < handsnum; handind++)
+        table["hand" + handind] = [];
+    //deals cards out
+    for (var sizind = 0; sizind < handsize; sizind++) {
+        for (var handind = 0; handind < handsnum; handind++) {
+            table["hand" + handind].push(this.cards[cardind]);
+            cardind += 1;
+        }
+    }
+    //sorts hands by suit and value
+    for (var item in table) {
+        table[item].sort(function (a, b) {
+            var x = trakInd(nudeck, a);
+            var y = trakInd(nudeck, b);
+            if (x < y) {
+                return -1;
+            }
+            if (x > y) {
+                return 1;
+            }
+            return 0;
+        });
+    }
+}
+var declarer = new hand(table['hand' + declar]);
+var partner = new hand(table['hand' + (declar + 2) % 4]);
+//returns high card points in hand. hand is array of card objects.
+
+//returns unshuffled deck. deck is array of 52 sorted card objects
+function nuDeck() {
+    var shuffNo = [];
+    for (var isuit = 0; isuit < suitlist.length; isuit++) {
+        for (var ivals = 0; ivals < vallist.length; ivals++) {
+            var card = {};
+            card.suit = suitlist[isuit];
+            card.valu = vallist[ivals];
+            shuffNo.push(card);
+        }
+    }
+    return shuffNo;
+}
+//returns index in arrref of objin.  used to track index of card in nuDeck for sorting.
+function trakInd(arrref, objin) {
+    var refind = arrref.findIndex(function (item) {
+        return (item.suit == objin.suit && item.valu == objin.valu)
+    });
+    return refind;
 }
 
 //returns string used to set up page display of hand both by text and icon. hand is an array of cards objects
 function handDisplay(hand) {
-    var dispstr = ["", ""];
+    var dispstr = "";
     for (var jsuit = 0; jsuit < suitlist.length; jsuit++) {
-        dispstr[0] += "<strong>&" + suitlist[jsuit] + ";: </strong>";
-        dispstr[1] += "<br>";
+        dispstr += "<strong>&" + suitlist[jsuit] + ";: </strong>";
         var suitsub = hand.filter(function (crds) {
             return crds.suit == suitlist[jsuit]
         });
         for (var kind = 0; kind < suitsub.length; kind++) {
-            dispstr[0] += suitsub[kind].valu + " ";
-            srcstr = '"images/cards/' + suitsub[kind].valu + "_of_" + suitlist[jsuit] + '.png"';
-            dispstr[1] += "<img src=" + srcstr + "/>";
+            dispstr += suitsub[kind].valu + " ";
         }
-        dispstr[0] += "<br>";
+        dispstr += "<br>";
     }
     return dispstr;
 }
@@ -221,8 +202,7 @@ function dealHand() {
         if (isNTOpen()) {
             var index = 0;
             for (var item in table) {
-                var handdisp = handDisplay(table[item])[0];
-                //            var totdisp = "<span class='tblpos'><b>" + players[index] + "</b></span>" + handdisp;
+                var handdisp = handDisplay(table[item]);
                 var divloc = "div" + index;
                 $("#" + divloc).append(handdisp);
                 index += 1
@@ -234,7 +214,7 @@ function dealHand() {
     };
     bidNfade(0);
 }
-//working 6/26
+//tests to see if deal gives 1NT opener
 function isNTOpen() {
     for (var item in table) {
         var tblhnd = new hand(table[item]);
@@ -247,22 +227,7 @@ function isNTOpen() {
     return false;
 }
 
-// sets up and displays high card and length points
-//function showPoints() {
-//    var index = 0;
-//    for (var item in table) {
-//        var hidisp = HCP(table[item]);
-//        var lendisp = LPts(table[item]);
-//        var totdisp = "<em>hi crd pts = " + hidisp + "<br> length pts = " + lendisp + "</em>";
-//        var divloc = "pts" + index;
-//        var divimloc = "impts" + index;
-//        document.getElementById(divloc).innerHTML = totdisp;
-//        document.getElementById(divimloc).innerHTML = totdisp;
-//        index += 1;
-//    }
-//    return;
-//}
-
+// displays point info for hand
 function $showPoints(crdarr) {
     var fochand = new hand(crdarr);
     var hidisp = fochand.hiCrdPts();
@@ -270,24 +235,14 @@ function $showPoints(crdarr) {
     var $totdisp = $("<div class='ptzdisp'><em>hi crd pts = " + hidisp + "<br> length pts = " + lendisp + "</em></div>");
     return $totdisp;
 }
-
-//called by button on main page. toggles card text/icon view
-function toggCrd() {
-    $(".txtrw").toggle();
-    $(".imrw").toggle();
-    return;
-}
-
-
 //animates opening bid process on txt view page
-function bidNfade(hndex) {
-    if (hndex > 3) return;
+function bidNfade(hndex, hndmax) {
+    if (!hndmax) hndmax = 3;
+    if (hndex > hndmax) return;
     var currplay = new hand(table['hand' + hndex]);
     var bidstr = "<h4 class='bids' style='color:green'>" + currplay.bidToOpen() + "</h4>";
     var divloc = "#div" + hndex;
-    var divimloc = "#imdiv" + hndex;
     var bidloc = "#bid" + hndex;
-    var bidimloc = "#imbid" + hndex;
     $(divloc).fadeTo(800, 0.2, function () {
         $(bidloc).html(bidstr);
     });
@@ -301,11 +256,11 @@ function bidNfade(hndex) {
     });
     return;
 }
-
+//animates and displays defender pass and parter's response bid
 function respNfade(hndex) {
     if (hndex > 3) return;
-    defndex = (hndex + 1) % 4;
-    partndex = (hndex + 2) % 4;
+    var defndex = (hndex + 1) % 4;
+    var partndex = (hndex + 2) % 4;
     var partplay = new hand(table['hand' + partndex]);
     var bidstr = "<h4 class='bids' style='color:green'>pass </h4>";
     var divloc = "#div" + defndex;
@@ -318,26 +273,9 @@ function respNfade(hndex) {
         $(bidloc).append(bidstr);
         $(divloc).fadeTo(800, 1.0);
     });
-    return partplay.resp21NT();
-}
-//animates opening bid process on icon view page
-function imbidNfade(hndex) {
-    if (hndex > 3) return;
-    var currplay = new hand(table['hand' + hndex]);
-    var bidstr = "<h4 style='color:green'>" + currplay.bidToOpen() + "</h4>";
-    var divloc = "#div" + hndex;
-    var divimloc = "#imdiv" + hndex;
-    var bidloc = "#bid" + hndex;
-    var bidimloc = "#imbid" + hndex;
-    $(divimloc).fadeTo(800, 0.2, function () {
-        $(bidimloc).html(bidstr);
-    });
-    $(divimloc).fadeTo(800, 1.0, function () {
-        if (currplay.bidToOpen() != "pass") return;
-        imbidNfade(hndex + 1)
-    });
     return;
 }
+
 
 function rebid(partbid) {
     var decplay = new hand(table['hand' + declar]);
@@ -348,27 +286,42 @@ function rebid(partbid) {
     else if (partbid == "3 spades" && decplay.dist().spades < 3) return "3 NT";
     else if (partbid == "3 hearts" && decplay.dist().hearts > 2) return "4 hearts";
     else if (partbid == "3 hearts" && decplay.dist().hearts < 3) return "3 NT";
-    else if (partbid =="pass") return "";
+    //if partner passes, bidding is over
+    else if (partbid == "pass") return "";
     else return "pass"
 }
-
+// animates and displays declarer rebid
 function rebidNfade() {
-    defndex = (declar + 3) % 4;
-    partndex = (declar + 2) % 4;
-    var partplay = new hand(table['hand' + partndex]);
+    var deflft = (declar + 1) % 4;
+    var defrgt = (declar + 3) % 4;
+    var part = (declar + 2) % 4;
+    var partplay = new hand(table['hand' + part]);
     var partbid = partplay.resp21NT();
-    var bidstr = "<h4 class='bids' style='color:green'>pass </h4>";
-    var divloc = "#div" + defndex;
-    var bidloc = "#bid" + defndex;
-    $(bidloc).append(bidstr);
+    var bidpasstr = "<h4 class='bids' style='color:green'>pass </h4>";
+    var divloc1 = "#div" + defrgt;
+    var bidloc1 = "#bid" + defrgt;
+    $(bidloc1).append(bidpasstr);
     var bidstr = "<h4 class='bids' style='color:green'>" + rebid(partbid) + "</h4>";
-    var divloc = "#div" + declar;
-    var bidloc = "#bid" + declar;
-    $(divloc).fadeTo(800, 0.2, function () {
-        $(bidloc).append(bidstr);
-        $(divloc).fadeTo(800, 1.0);
+    var divloc2 = "#div" + declar;
+    var bidloc2 = "#bid" + declar;
+    $(divloc2).fadeTo(800, 0.2, function () {
+        $(bidloc2).append(bidstr)
     });
-    return rebid(partbid);
+    $(divloc2).fadeTo(800, 1.0, function () {
+        var divloc3 = "#div" + deflft;
+        var bidloc3 = "#bid" + deflft;
+        $(bidloc3).append(bidpasstr);
+        if (rebid(partbid) == "") return;
+        else if (rebid(partbid) != "pass") {
+            var divloc4 = "#div" + part;
+            var bidloc4 = "#bid" + part;
+            $(bidloc4).append(bidpasstr);
+            var divloc1 = "#div" + defrgt;
+            var bidloc1 = "#bid" + defrgt;
+            $(bidloc1).append(bidpasstr);
+        };
+    });
+return;
 }
 
 //called by "show Opening Bids" button
