@@ -71,10 +71,9 @@ function hand(crdarr) {
         }
         if (totpts < 8) {
             for (var suit in this.dist()) {
-                if (this.dist()[suit] > 4) {
-                    return "2 " + suit;
-                } else return "pass";
+                if (this.dist()[suit] > 4) return "2 " + suit;
             }
+            return "pass"
         }
     }
 }
@@ -310,18 +309,18 @@ function rebidNfade() {
     $(divloc2).fadeTo(800, 1.0, function () {
         var divloc3 = "#div" + deflft;
         var bidloc3 = "#bid" + deflft;
-        $(bidloc3).append(bidpasstr);
         if (rebid(partbid) == "") return;
         else if (rebid(partbid) != "pass") {
+            $(bidloc3).append(bidpasstr);
             var divloc4 = "#div" + part;
             var bidloc4 = "#bid" + part;
             $(bidloc4).append(bidpasstr);
             var divloc1 = "#div" + defrgt;
             var bidloc1 = "#bid" + defrgt;
             $(bidloc1).append(bidpasstr);
-        };
+        } else $(bidloc3).append(bidpasstr);
     });
-return;
+    return;
 }
 
 //called by "show Opening Bids" button
