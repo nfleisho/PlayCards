@@ -275,7 +275,7 @@ function respNfade(hndex) {
     return;
 }
 
-
+// determines declarer rebid
 function rebid(partbid) {
     var decplay = new hand(table['hand' + declar]);
     var totpts = decplay.hiCrdPts() + decplay.lenPts();
@@ -289,7 +289,7 @@ function rebid(partbid) {
     else if (partbid == "pass") return "";
     else return "pass"
 }
-// animates and displays declarer rebid
+//animates and displays defender pass, declarer rebid and end of bidding
 function rebidNfade() {
     var deflft = (declar + 1) % 4;
     var defrgt = (declar + 3) % 4;
@@ -323,46 +323,71 @@ function rebidNfade() {
     return;
 }
 
-//called by "show Opening Bids" button
-function allBidNfade() {
-    bidNfade(0);
-    imbidNfade(0);
-    return;
-}
-
 
 // below are functions used to feed statistics page.
 
 //returns an array of percentage of hands dealt of points given by array index.
-function pointData(maxhands, shuff) {
-    var hcarr = [];
-    var totarr = [];
-    for (var i = 0; i < 40; i++) {
-        hcarr[i] = 0;
-        totarr[i] = 0;
-    }
-    for (var dlind = 0; dlind < maxhands; dlind++) {
+function NTdistData() {
+    var distobj = {
+        no2: 0,
+        no5with2: 0,
+        with5: 0
+    };
+    var totdistarr = [];
+    var ind = 0;
+    while (ind < 10000) {
         deck.create();
-        deck.shuffle(shuff);
+        deck.shuffle();
         deck.deal();
-        for (var item in table) {
-            var hipts = HCP(table[item]);
-            var lenpts = LPts(table[item]);
-            hcarr[hipts] += 1;
-            totarr[hipts + lenpts] += 1;
-        }
-        var tothands = hcarr.reduce(function (a, b) {
-            return a + b
-        }, 0);
-        var hcarrdat = hcarr.map(function (a) {
-            return a * 100 / tothands
-        })
-        var totarrdat = totarr.map(function (a) {
-            return a * 100 / tothands
-        })
-    }
-    return [hcarrdat, totarrdat];
+        if (isNTOpen()) {
+            var NThnd = new hand(table[isNTOpen()]);
+            var NTdist = NThnd.dist();
+            var distarr = [];
+            for (item in NTdist) distarr.push(NTdist[item]);
+            if (distarr.indexOf(5) != -1) distobj.with5+= 1;
+            else if ((distarr.indexOf(2) != -1)) distobj.no5with2 += 1;
+            else distobj.no2 += 1;
+            ind += 1
+        };
+    };
+    for (item in distobj) totdistarr.push(distobj[item]);
+    var totchk = totdistarr.reduce(function(a, b) {
+        return a + b
+    });
+    var probobj = {};
+    for (item in distobj) {
+        probobj[item] = distobj[item] * 100 / totchk
+    };
+    console.log(totchk, probobj);
 }
+function NTptData() {
+    var totptarr = [];
+    for (var k=0; k<41; k++) totptarr[k] = 0;
+    var ind = 0;
+    while (ind < 5000) {
+        deck.create();
+        deck.shuffle();
+        deck.deal();
+        if (isNTOpen()) {
+            var declarer = parseInt(isNTOpen().slice(-1));
+            var partner = (declarer+2)%4;
+            var NThnd = new hand(table[isNTOpen()]);
+            var parthnd = new hand(table["hand"+partner]);
+            var NTpts = NThnd.hiCrdPts()+parthnd.hiCrdPts()+NThnd.lenPts()+parthnd.lenPts();
+            totptarr[NTpts]+=1;
+            ind += 1
+        };
+    };
+    var totchk = totptarr.reduce(function(a, b) {
+        return a + b
+    });
+    var probptarr = [];
+    for (var j=0; j< totptarr.length; j++) {
+        probptarr[j] = totptarr[j] * 100 / totchk
+    };
+    return probptarr;
+}
+
 //working...
 function bidData(maxhands, shuff) {
     var bidopenarr = [];
@@ -389,33 +414,23 @@ function bidData(maxhands, shuff) {
 }
 
 function drawChart() {
-    // Create the data table.
-    //var maxhands = $("#dealsnum").val();
-    //var shuffmax = $("#shuff").val();
-    var maxhands = 5000;
-    var shuffmax = 3;
     var data = new google.visualization.DataTable();
     data.addColumn('number', 'Points');
-    data.addColumn('number', 'Percent by High Card Points');
-    data.addColumn('number', 'Percent by Total Points');
-    var ptdat = pointData(maxhands, shuffmax);
-    var hcarrdat = ptdat[0];
-    var totarrdat = ptdat[1];
-    var hihand = new DataArray(hcarrdat);
-    var tothand = new DataArray(totarrdat);
-    $("#stathi").html('<ul class="list-group"><h3>Statistics - Hi Card Points</h3><li class="list-group-item"> most likely: ' + hihand.mostlikely + '</li><li class="list-group-item">average:  ' + hihand.aver() + '  </li><li class="list-group-item"> standard dev: ' + hihand.stddev() + '</li></ul>')
-    $("#stattot").html('<ul class="list-group"><h3>Statistics - Total Points</h3><li class="list-group-item"> most likely: ' + tothand.mostlikely + '</li><li class="list-group-item">average: ' + tothand.aver() + '</li><li class="list-group-item"> standard dev: ' + tothand.stddev() + '</li></ul>')
+    data.addColumn('number', 'Percent of Partnerships');
+    var ptdat = NTptData();
+    var tothand = new DataArray(ptdat);
+    $("#stattot").html('<ul class="list-group"><h3>Statistics - Total Partnership Points</h3><li class="list-group-item"> most likely: ' + tothand.mostlikely + '</li><li class="list-group-item">average: ' + tothand.aver() + '</li><li class="list-group-item"> standard dev: ' + tothand.stddev() + '</li></ul>')
     var holddata = [];
-    for (var ind = 0; ind < hcarrdat.length; ind++) {
-        var mordata = [ind, hcarrdat[ind], totarrdat[ind]];
+    for (var ind = 0; ind < ptdat.length; ind++) {
+        var mordata = [ind, ptdat[ind]];
         holddata.push(mordata)
-    }
+    };
     data.addRows(holddata);
 
 
     // Set chart options
     var options = {
-        title: 'Bridge Hands by Points',
+        title: '1 NT Partnerships by Points',
         //'width':80%,
         height: 400,
         hAxis: {

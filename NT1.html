@@ -34,7 +34,6 @@
         });
 
         //google.charts.setOnLoadCallback(drawPiChart);
-
     </script>
 
 </head>
@@ -234,13 +233,27 @@
                 <div class="row" style="margin:2%;">
 
                     <div class="col-sm-12">
-                        <h1 style="text-align:center;"> Opening Bid Probabilities </h1>
-                        <h3>Click on <code>Get Stats</code> to generate strong opening bid probabilities based on 5000 deals.</h3>
+                        <h1 style="text-align:center;"> No Trump Distribution Probabilities </h1>
+                        <h4>There are three possible suit distributions consistent with the "balanced" requirement for No Trump. The (calculated) probabilities of their occurrance are shown below:</h4>
+                        <h4>
+                            <ul>
+                                <li>5-3-3-2 : 33%</li>
+                                <li>4-4-3-2 : 45%</li>
+                                <li>4-3-3-3 : 22%</li>
+                            </ul>
+                        </h4>
                     </div>
-                    <button id="getStats">Get Stats</button>
-                </div>
-                <div class="progress" style="width:20%;display:none">
-                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:100%">Working...
+                    <div class="row" style="margin:2%;">
+
+                        <div class="col-sm-12">
+                            <h1 style="text-align:center;"> 1 No Trump Partnership Point Probabilities </h1>
+                            <p>Click on <code>Get Stats</code> to generate data showing the total partnership points after a 1 No Trump opening bid, based on 5000 openings.</p>
+                        </div>
+                        <button id="getStats">Get Stats</button>
+                    </div>
+                    <div class="progress" style="width:20%;display:none">
+                        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:100%">Working...
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -257,64 +270,66 @@
                     <div class="col-sm-1"></div>
                 </div>
 
-            </div>
 
 
-        </div>
-        <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-10">
-                <p>Here is a hand where the opening bid is 1 NT. <strong>Assume</strong> (for the sake of practice) that the defense, whose hands are grayed out, will not interefere in the bidding. (They will pass.) Choose <em>the partner's </em>response and click on <code>Show Next Bid</code> to see the computed suggestion. Continue until one of the partner's bids "pass" to end the bidding.</p>
-            </div>
-            <div class="col-sm-1"></div>
-        </div>
-        <div class="row">
-            <div class="col-sm-7"></div>
-            <div class="col-sm-5" style="text-align:center"><strong>Dealer: North</strong></div>
-        </div>
-        <button id="nxtBid"> Show Next Bid</button>
-        <div class="row">
-            <div class="col-sm-5"></div>
-
-            <div class="col-sm-2">
-                <h4 class="tblpos">North</h4>
-                <div class="hnddisp" id="div0" data-hand="hand0"></div>
-                <div id="bid0"></div>
-                <div class="pts"></div>
 
             </div>
-            <div class="col-sm-5"></div>
         </div>
-        <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-2">
-                <h4 class="tblpos">West</h4>
-                <div class="hnddisp" id="div3" data-hand="hand3"></div>
-                <div id="bid3"></div>
-                <div class="pts"></div>
-
-            </div>
-            <div class="col-sm-4"></div>
-            <div class="col-sm-2">
-                <h4 class="tblpos">East</h4>
-                <div class="hnddisp" id="div1" data-hand="hand1"></div>
-                <div id="bid1"></div>
-                <div class="pts"></div>
-
-            </div>
-            <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <p>Here is a hand where the opening bid is 1 NT. <strong>Assume</strong> (for the sake of practice) that the defense, whose hands are grayed out, will not interefere in the bidding. (They will pass.) Choose <em>the partner's </em>response and click on <code>Show Next Bid</code> to see the computed suggestion. Continue until one of the partner's bids "pass" to end the bidding.</p>
         </div>
-        <div class="row">
-            <div class="col-sm-5"></div>
-            <div class="col-sm-2">
-                <h4 class="tblpos">South</h4>
-                <div class="hnddisp" id="div2" data-hand="hand2"></div>
-                <div id="bid2"></div>
-                <div class="pts"></div>
+        <div class="col-sm-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-7"></div>
+        <div class="col-sm-5" style="text-align:center"><strong>Dealer: North</strong></div>
+    </div>
+    <button id="nxtBid"> Show Next Bid</button>
+    <div class="row">
+        <div class="col-sm-5"></div>
 
-            </div>
-            <div class="col-sm-5" style='min-height:250px'></div>
+        <div class="col-sm-2">
+            <h4 class="tblpos">North</h4>
+            <div class="hnddisp" id="div0" data-hand="hand0"></div>
+            <div id="bid0"></div>
+            <div class="pts"></div>
+
         </div>
+        <div class="col-sm-5"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2">
+            <h4 class="tblpos">West</h4>
+            <div class="hnddisp" id="div3" data-hand="hand3"></div>
+            <div id="bid3"></div>
+            <div class="pts"></div>
+
+        </div>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-2">
+            <h4 class="tblpos">East</h4>
+            <div class="hnddisp" id="div1" data-hand="hand1"></div>
+            <div id="bid1"></div>
+            <div class="pts"></div>
+
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5"></div>
+        <div class="col-sm-2">
+            <h4 class="tblpos">South</h4>
+            <div class="hnddisp" id="div2" data-hand="hand2"></div>
+            <div id="bid2"></div>
+            <div class="pts"></div>
+
+        </div>
+        <div class="col-sm-5" style='min-height:250px'></div>
+    </div>
 
 
     </div>
@@ -354,10 +369,9 @@
                 $(".ptzdisp").remove();
             });
             $("#getStats").click(function() {
-                $(".progress").show("fast", drawPiChart).hide("fast");
+                $(".progress").show("fast", drawChart).hide("fast");
             });
         })
-
     </script>
 
 </body>
